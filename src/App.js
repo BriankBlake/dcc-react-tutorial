@@ -19,6 +19,7 @@ function App() {
     <div>
       <DisplayEntries parentEntries={entries} />
       <AddEntryForm addNewEntryProperty={addNewEntry} />
+      <EntriesChartTracker parentEntries={entries} />
     </div>
   );
 }

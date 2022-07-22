@@ -1,27 +1,26 @@
-import React, { useState } from "react";
-import DisplayEntries from "./Components/DisplayEntries/DisplayEntries";
-import AddEntryForm from "./Components/AddEntry/AddEntryFrom";
-import EntriesChartTracker from "./EntriesChartTracker/EntriesChartTracker";
+import React, { useState, useEffect } from 'react';
+import { Chart } from 'react-google-charts';
 
-function App() {
-  const [entries, setEntries] = useState([
-    { weight: 175, date: "11-23-2021" },
-    { weight: 176, date: "11-24-2021" },
-  ]);
+const EntriesChartTracker = (props) => {
 
-  function addNewEntry(entry) {
-    let tempEntries = [...entries, entry];
+    const [chartData, setChartData] = useState([]);
 
-    setEntries(tempEntries);
-  }
+    useEffect(() => {
+        let tempChartData = props.parentEntries.map(entry => {
+            return[entry.date, entry.weight];
+        });
+        setChartData(tempChartData);
+    }, [props.parentEntries])
 
-  return (
-    <div>
-      <DisplayEntries parentEntries={entries} />
-      <AddEntryForm addNewEntry={addNewEntry} />
-      <EntriesChartTracker parentEntries={entries} />
-    </div>
-  );
+    return (
+        <Chart
+        chartType="LineChart"
+        data={[["Date", "Weight"], ...chartData]}
+        width="100%"
+        height="400px"
+        legendToggle
+        />
+    );
 }
-
-export default App;
+ 
+export default EntriesChartTracker;
