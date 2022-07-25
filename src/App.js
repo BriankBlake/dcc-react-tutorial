@@ -16,10 +16,16 @@ function App() {
   }
 
   return (
-    <div>
-      <DisplayEntries parentEntries={entries} />
-      <AddEntryForm addNewEntryProperty={addNewEntry} />
-      <EntriesChartTracker parentEntries={entries} />
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-6">
+          <DisplayEntries parentEntries={entries} />
+          <AddEntryForm addNewEntryProperty={addNewEntry} />
+        </div>
+        <div className="col-md-6">
+          <EntriesChartTracker parentEntries={entries} />
+        </div>
+      </div>
     </div>
   );
 }
